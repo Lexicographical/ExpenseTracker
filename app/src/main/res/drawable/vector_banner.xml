@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1000dp"
+    android:height="150dp"
+    android:viewportHeight="24.0"
+    android:viewportWidth="24.0">
+    <path
+        android:fillColor="@color/spButtonFocused"
+        android:pathData="M 0,0 l 800,0 0,300 -800,0z" />
+    <path
+        android:fillColor="@color/spButtonNotFocused"
+        android:pathData="M 11,0 l 100,0 0,300 -5,0z" />
+</vector>

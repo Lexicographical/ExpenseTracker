@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.liu.expensetracker.Numpad"
+    tools:showIn="@layout/app_bar_numpad">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/darkBG">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="0.00"
+                android:id="@+id/balance"
+                android:textSize="30sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/textFontColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/temp"
+                android:textSize="25sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/textFontColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/add"
+                    android:id="@+id/add"
+                    android:layout_weight="1"
+                    android:background="@drawable/sp_calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/subtract"
+                    android:id="@+id/subtract"
+                    android:layout_weight="1"
+                    android:background="@drawable/sp_calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/arr"
+                    android:id="@+id/arr"
+                    android:layout_weight="1"
+                    android:background="@drawable/sp_calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n7"
+                    android:id="@+id/n7"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n8"
+                    android:id="@+id/n8"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n9"
+                    android:id="@+id/n9"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n4"
+                    android:id="@+id/n4"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n5"
+                    android:id="@+id/n5"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n6"
+                    android:id="@+id/n6"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n1"
+                    android:id="@+id/n1"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n2"
+                    android:id="@+id/n2"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n3"
+                    android:id="@+id/n3"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/n0"
+                    android:id="@+id/n0"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/decimal"
+                    android:id="@+id/decimal"
+                    android:layout_weight="1"
+                    android:background="@drawable/calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/clear"
+                    android:id="@+id/clear"
+                    android:layout_weight="1"
+                    android:background="@drawable/sp_calc_button"
+                    android:textColor="@color/btnFontColor"
+                    android:textSize="20sp"
+                    android:onClick="btnClicked" />
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+</RelativeLayout>
