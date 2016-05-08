@@ -12,16 +12,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ButtonPreferenceManager {
 
     private static File file;
     private static String fn = "buttons.yml";
-    private static double[] orig = {1, 2, 5, 10, 20, 50, 100, 200, 500};
+    private static float[] orig = {1, 2, 5, 10, 20, 50, 100, 200, 500};
+    private static boolean clear = false;
 
     public static void init(Context c) {
 
-        File file = new File(c.getFilesDir(), fn);
+        file = new File(c.getFilesDir(), fn);
+        if (clear) {
+            file.delete();
+        }
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -31,9 +36,28 @@ public class ButtonPreferenceManager {
         }
 
         Map<String, String> map = read();
+        if (map == null) {
+            map = new TreeMap<String, String>();
+        } else {
+            map = new TreeMap<String, String>(map);
+        }
         if (map.size() < 9) {
+            map = new TreeMap<>();
+            DecimalFormat format = new DecimalFormat();
+            format.setMaximumFractionDigits(0);
             for (int i = 0; i < 9; i++) {
-                map.put("b" + i, String.valueOf(orig));
+                map.put("b" + i, format.format(orig[i]));
+            }
+            try {
+
+                YamlWriter writer = new YamlWriter(new FileWriter(file));
+                writer.write(map);
+                writer.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
@@ -43,7 +67,7 @@ public class ButtonPreferenceManager {
 
         try {
             YamlReader reader = new YamlReader(new FileReader(file));
-            Map<String, String> map = (Map<String, String>) reader.read();
+            TreeMap<String, String> map = (TreeMap<String, String>) reader.read();
             reader.close();
             return map;
         } catch (FileNotFoundException e) {
@@ -59,6 +83,11 @@ public class ButtonPreferenceManager {
     public static void save(int button, double val) {
 
         Map<String, String> map = read();
+        if (map == null) {
+            map = new TreeMap<String, String>();
+        } else {
+            map = new TreeMap<String, String>(map);
+        }
 
         DecimalFormat format = new DecimalFormat();
         format.setMaximumFractionDigits(2);

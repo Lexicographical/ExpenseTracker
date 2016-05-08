@@ -83,6 +83,9 @@ public class CustomButton extends AppCompatActivity
                                     format.setMaximumIntegerDigits(5);
                                     format.setMaximumFractionDigits(2);
                                     button.setText(format.format(val));
+
+                                    String idName = getResources().getResourceName(button.getId());
+                                    ButtonPreferenceManager.save(Integer.parseInt(String.valueOf(idName.charAt(idName.length() - 1))) - 1, val);
                                 } catch (NumberFormatException e) {
                                     e.printStackTrace();
                                 }
