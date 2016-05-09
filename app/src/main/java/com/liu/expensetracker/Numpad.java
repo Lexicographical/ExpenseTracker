@@ -1,8 +1,11 @@
 package com.liu.expensetracker;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -47,13 +50,42 @@ public class Numpad extends AppCompatActivity
 
         current = BalanceManager.getCurrent();
 
-        DecimalFormat format = new DecimalFormat();
-        format.setMinimumFractionDigits(2);
-        format.setMaximumFractionDigits(2);
-
         balance = (TextView) findViewById(R.id.balance);
         temp = (TextView) findViewById(R.id.temp);
-        balance.setText(format.format(current.getAmount()));
+        balance.setText(Utility.formatDouble(current.getAmount()));
+
+        Button clear = (Button) findViewById(R.id.clear);
+        if (clear != null) {
+            final Context context = this;
+            clear.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("Reset Balance");
+                    alert.setMessage("Are you sure you want to reset balance: " + current.getName() + "?");
+
+                    alert.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            current.setAmount(0);
+                            balance.setText(Utility.formatDouble(current.getAmount()));
+                        }
+                    });
+
+                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+                    alert.show();
+
+                    return false;
+                }
+            });
+        }
+
     }
 
     @Override
@@ -159,15 +191,9 @@ public class Numpad extends AppCompatActivity
     }
 
     private void add(double d) {
-        String text = balance.getText().toString().replaceAll(",", "");
-        double bal = Double.parseDouble(text);
-        bal += d;
-        DecimalFormat format = new DecimalFormat();
-        format.setMinimumFractionDigits(2);
-        format.setMaximumFractionDigits(2);
-        balance.setText(format.format(bal));
-        temp.setText("");
         current.addAmount(d);
+        balance.setText(Utility.formatDouble(current.getAmount()));
+        temp.setText("");
         BalanceManager.save(current);
     }
 

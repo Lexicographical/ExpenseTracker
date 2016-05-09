@@ -51,6 +51,10 @@ public class CustomButton extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        current = BalanceManager.getCurrent();
+        balance = (TextView) findViewById(R.id.balance);
+        balance.setText(Utility.formatDouble(current.getAmount()));
+
         Map<String, String> buttonMap = ButtonPreferenceManager.read();
 
         int[] ids = {R.id.b1, R.id.b2, R.id.b3, R.id.b4, R.id.b5, R.id.b6, R.id.b7, R.id.b8, R.id.b9};
@@ -80,9 +84,13 @@ public class CustomButton extends AppCompatActivity
                                 try {
                                     val = Double.parseDouble(input.getText().toString());
                                     DecimalFormat format = new DecimalFormat();
-                                    format.setMaximumIntegerDigits(5);
                                     format.setMaximumFractionDigits(2);
-                                    button.setText(format.format(val));
+                                    String formatted = format.format(val);
+                                    if (formatted.length() > 8) {
+                                        format = new DecimalFormat("0.00E0");
+                                        formatted = format.format(val);
+                                    }
+                                    button.setText(formatted);
 
                                     String idName = getResources().getResourceName(button.getId());
                                     ButtonPreferenceManager.save(Integer.parseInt(String.valueOf(idName.charAt(idName.length() - 1))) - 1, val);
@@ -105,14 +113,6 @@ public class CustomButton extends AppCompatActivity
                 });
             }
         }
-
-        DecimalFormat format = new DecimalFormat();
-        format.setMinimumFractionDigits(2);
-        format.setMaximumFractionDigits(2);
-
-        current = BalanceManager.getCurrent();
-        balance = (TextView) findViewById(R.id.balance);
-        balance.setText(format.format(current.getAmount()));
 
     }
 
@@ -185,14 +185,8 @@ public class CustomButton extends AppCompatActivity
     }
 
     private void add(double d) {
-        String text = balance.getText().toString().replaceAll(",", "");
-        double bal = Double.parseDouble(text);
-        bal += d;
-        DecimalFormat format = new DecimalFormat();
-        format.setMinimumFractionDigits(2);
-        format.setMaximumFractionDigits(2);
-        balance.setText(format.format(bal));
         current.addAmount(d);
+        balance.setText(Utility.formatDouble(current.getAmount()));
         BalanceManager.save(current);
     }
 

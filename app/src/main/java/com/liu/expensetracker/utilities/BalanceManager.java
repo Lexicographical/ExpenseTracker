@@ -148,7 +148,7 @@ public class BalanceManager {
     }
 
     public static boolean delete(String name) {
-        if (name.equals(key1)) {
+        if (name.equals("default")) {
             return false;
         }
         Map<String, String> bals = getBalances();

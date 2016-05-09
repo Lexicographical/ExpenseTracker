@@ -39,12 +39,8 @@ public class BalanceAdapter extends ArrayAdapter<Balance> {
 
         Balance bal = getItem(position);
 
-        DecimalFormat format = new DecimalFormat();
-        format.setMaximumIntegerDigits(5);
-        format.setMaximumFractionDigits(2);
-
         name.setText(bal.getName());
-        amount.setText(format.format(bal.getAmount()));
+        amount.setText(Utility.formatDouble(bal.getAmount()));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
