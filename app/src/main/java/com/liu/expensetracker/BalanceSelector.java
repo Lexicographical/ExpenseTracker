@@ -72,7 +72,7 @@ public class BalanceSelector extends AppCompatActivity {
                             double amount = Double.parseDouble(iAmount.getText().toString());
 
                             Balance balance = new Balance(name, amount);
-                            BalanceManager.setCurrent(balance);
+                            BalanceManager.setCurrentBalance(balance);
 
                             Intent intent = new Intent(context, context.getClass());
                             startActivity(intent);

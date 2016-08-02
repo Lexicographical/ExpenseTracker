@@ -48,7 +48,7 @@ public class BalanceAdapter extends ArrayAdapter<Balance> {
                 TextView nv = (TextView) v.findViewById(R.id.bitem_name);
                 String name = nv.getText().toString();
 
-                BalanceManager.setCurrent(BalanceManager.getBalance(name));
+                BalanceManager.setCurrentBalance(BalanceManager.getBalance(name));
 
                 Intent intent = new Intent(v.getContext(), Utility.clazz);
                 v.getContext().startActivity(intent);
@@ -62,43 +62,78 @@ public class BalanceAdapter extends ArrayAdapter<Balance> {
             @Override
             public boolean onLongClick(final View v) {
 
-                Context context = v.getContext();
+                final Context context = v.getContext();
 
-                AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                TextView vName = (TextView) v.findViewById(R.id.bitem_name);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final TextView vName = (TextView) v.findViewById(R.id.bitem_name);
 
-                alert.setTitle("Delete Balance");
-                alert.setMessage("Are you sure you want to delete balance: " + vName.getText() + "?");
+                String[] items = {"History", "Delete"};
 
-                alert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                builder.setTitle("Balance Editor").setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            // view history
+                        } else {
 
-                        TextView vName = (TextView) v.findViewById(R.id.bitem_name);
-                        String name = vName.getText().toString();
+                            AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                            alert.setTitle("Delete Balance");
+                            alert.setMessage("Are you sure you want to delete balance: " + vName.getText() + "?");
 
-                        boolean success = BalanceManager.delete(name);
+                            alert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                        String message = "Unable to delete balance: " + name + ".";
-                        if (success) {
-                            message = "Successfully deleted balance: " + name + "!";
+                                    TextView vName = (TextView) v.findViewById(R.id.bitem_name);
+                                    String name = vName.getText().toString();
+
+                                    boolean success = BalanceManager.deleteBalance(name);
+
+                                    String message = "Unable to delete balance: " + name + ".";
+                                    if (success) {
+                                        message = "Successfully deleted balance: " + name + "!";
+                                    }
+                                    Toast toast = Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    Intent intent = new Intent(v.getContext(), BalanceSelector.class);
+                                    v.getContext().startActivity(intent);
+                                }
+                            });
+                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                            alert.show();
+
                         }
-                        Toast toast = Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT);
-                        toast.show();
-                        Intent intent = new Intent(v.getContext(), BalanceSelector.class);
-                        v.getContext().startActivity(intent);
                     }
                 });
 
+//                builder.setTitle("Delete Balance");
+//                builder.setMessage("Are you sure you want to delete balance: " + vName.getText() + "?");
+//
+//                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        TextView vName = (TextView) v.findViewById(R.id.bitem_name);
+//                        String name = vName.getText().toString();
+//
+//                        boolean success = BalanceManager.delete(name);
+//
+//                        String message = "Unable to delete balance: " + name + ".";
+//                        if (success) {
+//                            message = "Successfully deleted balance: " + name + "!";
+//                        }
+//                        Toast toast = Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT);
+//                        toast.show();
+//                        Intent intent = new Intent(v.getContext(), BalanceSelector.class);
+//                        v.getContext().startActivity(intent);
+//                    }
+//                });
 
-
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-
-                alert.show();
+                builder.show();
 
                 return false;
             }

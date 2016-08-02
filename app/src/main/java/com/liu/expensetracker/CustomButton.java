@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.text.method.DigitsKeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +25,6 @@ import com.liu.expensetracker.utilities.ButtonPreferenceManager;
 import com.liu.expensetracker.utilities.Utility;
 
 import java.text.DecimalFormat;
-import java.util.Map;
 
 public class CustomButton extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,13 +52,11 @@ public class CustomButton extends AppCompatActivity
         balance = (TextView) findViewById(R.id.balance);
         balance.setText(Utility.formatDouble(current.getAmount()));
 
-        Map<String, String> buttonMap = ButtonPreferenceManager.read();
-
         int[] ids = {R.id.b1, R.id.b2, R.id.b3, R.id.b4, R.id.b5, R.id.b6, R.id.b7, R.id.b8, R.id.b9};
         for (int i = 0; i < ids.length; i++) {
             final Button button = (Button) findViewById(ids[i]);
             if (button != null) {
-                button.setText(buttonMap.get("b" + i));
+                button.setText(ButtonPreferenceManager.getButtonText(i));
                 final Context context = this;
                 button.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -187,7 +182,7 @@ public class CustomButton extends AppCompatActivity
     private void add(double d) {
         current.addAmount(d);
         balance.setText(Utility.formatDouble(current.getAmount()));
-        BalanceManager.save(current);
+        BalanceManager.saveBalance(current);
     }
 
 }
